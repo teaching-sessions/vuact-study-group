@@ -1,1 +1,3 @@
-# vuact-study-group
+# Vue-act Study Group
+
+## Syllabus

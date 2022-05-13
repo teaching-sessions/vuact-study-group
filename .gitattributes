@@ -1,0 +1,13 @@
+*           text=auto
+
+*.ts        text eol=lf
+*.tsx       text eol=lf
+*.markdown  text diff=markdown
+*.md        text diff=markdown
+*.scss      text diff=css
+*.json      text
+.css        text diff=css
+*.htm       text diff=html
+*.html      text diff=html
+
+*.*rc       text
