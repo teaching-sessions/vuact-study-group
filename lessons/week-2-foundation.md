@@ -4,6 +4,12 @@
 
 To cover key topics that will serve as a foundation to all skills required to be proficient in font-end frameworks.
 
+## Key Learning Objectives
+
+1. Understand what concepts yield us the best bang for our buck
+2. Cover key JS/TS topics that will be required for React and Vue
+3. Discuss reoccurring patterns that present themselves in component based frameworks
+
 ## Overview
 
 It's all just HTML, CSS, and JavaScript at the end of the day.
