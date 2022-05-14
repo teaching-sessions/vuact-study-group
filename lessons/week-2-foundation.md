@@ -119,10 +119,7 @@ export default MyComponent;
 const MyHook = (): IHook => {
   const [get, set] = useState<number>(0);
 
-  return [
-    get,
-    set,
-  ];
+  return [get, set];
 };
 
 const MyComponent: React.FC<MyProps> = ({ hook }) => {
@@ -140,10 +137,8 @@ interface MyProps {
 export default MyComponent;
 ```
 
-![Kronk](https://media.giphy.com/media/KEYEpIngcmXlHetDqz/giphy.gif)
+![Use the lever](https://media.giphy.com/media/KEYEpIngcmXlHetDqz/giphy.gif)
 
 The point is, React and Vue use functions...
 
 #### Callbacks
-
-
