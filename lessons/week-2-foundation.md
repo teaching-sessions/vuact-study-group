@@ -148,3 +148,137 @@ export default MyComponent;
 The point is, React and Vue use functions...
 
 #### Callbacks
+
+Simple: Passing a function as an argument.
+
+```typescript
+const Print = (msg: string): void => {
+  console.log(msg);
+};
+
+const DoSomething = (printer: (msg: string) => void): void => {
+  if (error) {
+    printer(error);
+  } else {
+    // something else.
+  }
+};
+```
+
+**Callbacks are just like ordering pizza!**
+
+![Krusty Krab](https://media.giphy.com/media/5hfYHLgvhBaKI/giphy.gif)
+
+Do you just wait at the front door or do something else until the door bell rings?
+
+##### JavaScript then chains
+
+```typescript
+let widgets = [];
+
+HttpClient.GetStuff().then((result) => (widgets = result));
+```
+
+##### Callbacks in React and Vue
+
+1. Event Handling
+
+```typescript
+const submitForm = (event): void => {
+  // send to API
+}
+
+<button type='submit' onClick={submitForm}>
+```
+
+2. Callbacks as Props
+
+```typescript
+const Form: React.FC<FormProps> = ({ submitForm }) => {
+  return( /* lots of jsx */
+  <button type='submit' onClick={submitForm}>);
+}
+
+interface FormProps {
+  onSubmit: () => void;
+}
+
+export default Form;
+```
+
+3. Using Async Code
+
+```typescript
+let widgets = [];
+
+HttpClient.GetStuff().then((result) => (widgets = result));
+
+or...
+
+const widgets = await HttpClient.GetStuff();
+```
+
+#### Destructuring Arrays and Objects
+
+##### Arrays
+
+The useState hook in React uses array destructuring.
+
+```typescript
+const [a, b] = [1, 2];
+
+a++;
+b = a + b;
+```
+
+...using React hooks.
+
+```typescript
+const [count, setCount] = useState<number>(0);
+
+console.log(count);
+setCount(19);
+```
+
+...without destructuring.
+
+```typescript
+const countState = useState<number>(0);
+
+console.log(countState[0]);
+countState[1](19);
+```
+
+##### Objects
+
+Used when passing props to a component.
+
+```typescript
+const myObj = {
+  count: number;
+  setCount: (value: number) => void;
+};
+
+let count = myObj.count;
+let setCount = mjObj.setCount;
+
+const { count, setCount } = myObj;
+```
+
+...using in a component props.
+
+```typescript
+const MyComponent: React.FC<MyComponentProps> = ({ count, setCount }) => {
+  console.log(count);
+  setCount(19);
+
+  return (/* our jsx */);
+}
+
+interface MyComponentProps {
+  count: number;
+  setCount: (value: number) => void;
+}
+
+export default MyComponent;
+```
