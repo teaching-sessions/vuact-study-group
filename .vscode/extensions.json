@@ -3,7 +3,7 @@
     "davidanson.vscode-markdownlint",
     "yzhang.markdown-all-in-one",
     "shd101wyy.markdown-preview-enhanced",
-    "eamodio.gitlens",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "donjayamanne.githistory"
   ]
 }
