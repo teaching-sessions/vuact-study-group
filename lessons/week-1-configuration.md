@@ -9,6 +9,9 @@ To understand the basics of a Node front-end web application structure with resp
 1. Learn how to bootstrap a React or Vue project via their CLI's
 2. Gain the basics of the application structure
 3. Understand the supporting Node ecosystem and set of useful 3rd party libraries
+4. This is a mostly, sit back and relax day. No coding.
+
+![self care](https://media.giphy.com/media/f5ddtWF1ebTT5d58Ky/giphy.gif)
 
 ## Why Should I Care?
 
@@ -97,12 +100,26 @@ cd project-name
 
 npm install
 
-npm run start
+npm run serve
 ```
 
 ![vue cli options](../assets/week-1/VueCliOptions.png)
 
 ![vue version](../assets/week-1/VueProjectOptions.png)
+
+### Vue with Vite
+
+```powershell
+cd C:\MyProjectLocation\WhoCares
+
+npm init vue@3
+
+cd project-name
+
+npm install
+
+npm run serve
+```
 
 ## Finished Results
 
@@ -178,9 +195,9 @@ All those yummy files that we can deploy to a server.
 
 #### Build Process TLDR
 
-1. Babel converts your TS to JS
-2. Webpack takes every js, html, css file and bundles it into one of each.
-3. You don't really need to know any details about what babel or webpack are doing.
+1. Babel converts your TS, JSX, ECMASCript 2015+ to JS
+2. Webpack takes every js, html, css file and bundles it
+3. You don't really need to know any details about what babel or webpack are doing
 
 ### Coverage and Cypress
 
@@ -189,7 +206,7 @@ All those yummy files that we can deploy to a server.
 1. Cypress is not scary.
 2. You need to test the functionally of your app's API/REST calls. Cypress can intercept HTTP requests and returns what you expect.
 3. You need to test mobile functionality. Cypress can resize the screen and you can assert if an element exists or does not exist in the document.
-4. You can configure Cypress to test via Firefox, Chrome, Edge, IE11. Ok maybe not IE11.
+4. You can configure Cypress to test via Firefox, Chrome, Edge, Electron, and Brave.
 5. Cypress is not scary.
 6. Use Cypress for E2E. Testing Library + Jest Dom + User Event are much better for testing components and basic user interaction.
 7. Cypress is not scary.
@@ -201,6 +218,8 @@ All those yummy files that we can deploy to a server.
 ![a series of tubes](https://media.giphy.com/media/hWSCVQEfDP6ADsLweg/giphy.gif)
 
 #### First rule of development club: Delete your node_modules and package-lock and npm install
+
+#### Second rule of development club: Sir, did you turn off VSCode and turn it back on again?
 
 ![first rule of dev club](https://media.giphy.com/media/YAy9NNu16pYYg/giphy.gif)
 
@@ -309,3 +328,117 @@ PrintWidth, line endings, trailing commas, spacing...but only PrintWidth has any
 ```
 
 If your team can't come to a decision, just use the default and get it over with.
+
+#### Others
+
+Package.json and Package-lock.json - Your dependencies
+
+README.md - Your 5 min project overview
+
+tsconfig.json - Typescript config file
+
+#### src folder
+
+##### Folder Structure
+
+###### Don't spend more than 5 minutes choosing a folder structure
+
+[Analysis Paralysis](https://en.wikipedia.org/wiki/Analysis_paralysis)
+
+[React page](https://reactjs.org/docs/faq-structure.html)
+
+[Feature folders blog post](https://www.kamilgrzybek.com/design/feature-folders/)
+
+![structure](../assets/week-1/FolderStructure.png)
+
+**Opinion:** I prefer feature folders because they:
+
+a) scale the best I've seen "so far"
+b) are a "react" way of doing things because they use composition by default
+
+###### Don't overthink it
+
+##### Miscellaneous
+
+react-app-env.d.ts
+reportWebVitals.ts
+setupTest.ts
+registerServiceWorker.ts
+shims-vue.d.ts
+
+Add these to the eslint ignore and forget about them.
+
+##### Index and Main
+
+Takes the root element from the index.html and bootstraps the project.
+
+![Index](../assets/week-1/ReactIndex.png)
+
+##### App
+
+Is the "entry point" into the Application itself.
+
+Usually contains the base layout for the project and the routes that a user can navigate to.
+
+(We will talk about routing later.)
+
+![app](../assets/week-1/AppComponent.png)
+
+## This
+
+## Next
+
+## Section
+
+## Is
+
+## Really
+
+## Important
+
+## Test or no test, there is no try
+
+![palpatine thanks you](https://media.giphy.com/media/gitp8bQ5sAJxj6Ps3Y/giphy.gif)
+
+Hey kids, want to be a better developer?
+
+Test your sh\*\*.
+
+### The best way to get gud at React/Vue is to force yourself to write tests for your code
+
+When you write tests for your code, it will force you to realize when you need to break up a component or think about it in a different way.
+
+### Testing Framework in React/Vue
+
+#### Jest
+
+- test runner
+- asserts and mocks
+
+#### Testing Library
+
+- renders our components
+- queries the dom
+
+##### Jest Dom
+
+- custom matchers for asserts ("toHaveClass", "toBeVisible")
+
+##### User Event
+
+- provides accurate user interaction with your components
+- unlike manually firing an event, simulates how a real life person interacts with your app
+
+![test example](../assets/week-1/TestExample.png)
+
+Not scary right?
+
+#### Cypress
+
+- e2e testing, such as mocking http calls and mobile testing
+
+### That All Folks
+
+Questions, comments, or death threats?
+
+![porky](https://media.giphy.com/media/mR3dXKpI6P8CA/giphy.gif)
