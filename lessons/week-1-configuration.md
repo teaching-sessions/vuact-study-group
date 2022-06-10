@@ -9,7 +9,7 @@ To understand the basics of a Node front-end web application structure with resp
 1. Learn how to bootstrap a React or Vue project via their CLI's
 2. Gain the basics of the application structure
 3. Understand the supporting Node ecosystem and set of useful 3rd party libraries
-4. This is a mostly, sit back and relax day. No coding.
+4. This is a mostly sit back and relax day. No coding.
 
 ![self care](https://media.giphy.com/media/f5ddtWF1ebTT5d58Ky/giphy.gif)
 
@@ -383,6 +383,21 @@ Usually contains the base layout for the project and the routes that a user can 
 (We will talk about routing later.)
 
 ![app](../assets/week-1/AppComponent.png)
+
+##### Styles and Sass
+
+Sass is pretty dope dizzle.
+
+![sass wow](../assets/week-1/SassWow.png)
+
+Frameworks that support this:
+
+1. bootstrap
+2. bulma
+3. foundation
+4. tailwind
+5. UIkit
+6. lots more...
 
 ## This
 

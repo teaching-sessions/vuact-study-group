@@ -4,7 +4,7 @@
 
 ## Meeting Days
 
-Every Friday ~ 2PM starting on June 10
+Every Friday 1CST/2EST starting on June 10 (Skipping July 1st)
 
 ## Instructors
 
