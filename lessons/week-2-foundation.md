@@ -206,7 +206,19 @@ interface FormProps {
 export default Form;
 ```
 
-3. Using Async Code
+3. JS Array Functions
+
+| .NET Linq  | JS Array |
+| ---------- | -------- |
+| Select     | Map      |
+| SelectMany | FlatMap  |
+| Where      | Filter   |
+| Any        | Some     |
+| All        | Every    |
+
+[Underscore.js](https://github.com/jashkenas/underscore) - More utility functions.
+
+1. Using Async Code
 
 ```typescript
 let widgets = [];
