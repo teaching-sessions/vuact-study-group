@@ -280,6 +280,12 @@ or...
 const widgets = await HttpClient.GetStuff();
 ```
 
+```typescript
+const myAsyncFunction = async (): void => {
+  await callSomething();
+};
+```
+
 [ESLint plugin for promises](https://github.com/xjamundx/eslint-plugin-promise) - Lots of nice rules for ES6 promises.
 
 If you already know how Tasks/async/await work in .NET, you're 90% of the way there.
@@ -376,3 +382,183 @@ const spreadArray = [...myArray];
 [React no spread props](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-props-no-spreading.md) - Not enabled by default.
 
 **More to come later!**
+
+### State
+
+Definition: Any non-static variable.
+
+1. User is logged on or off.
+2. Input is valid or invalid.
+3. Current value of an input.
+4. A button is disabled depending on our input validity.
+
+![log in state](https://imgs.search.brave.com/uDsOXClHYjHC_N6sb60JMqBsrVS3nt6vHfzUDAkKBgU/rs:fit:1135:656:1/g:ce/aHR0cHM6Ly9jc3Mt/dHJpY2tzLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMjAxOC8w/Ny9zdGF0ZS1tYWNo/aW5lcy0yLnBuZw)
+
+The hardest thing in React/Vue is **discovering** where your state needs to be. Because, state can only flow down!
+
+### One-Way Data Flow
+
+#### Data flow in both React and Vue goes one-way, down
+
+#### Data flows down, callbacks flow up
+
+![react data flow](https://imgs.search.brave.com/3EwocDlHOxmN1Theab6k54mTC8BgxikAEtfvglfYN3g/rs:fit:677:304:1/g:ce/aHR0cHM6Ly9taXJv/Lm1lZGl1bS5jb20v/bWF4LzExMDQvMSpS/cElpYTNTYUlLVnhh/YTJHN0NoOTBnLnBu/Zw)
+
+```typescript
+<First> // data can only be updated by passing a function to children
+  <Second> // can only access parent data via props
+    <Third> // can only update props data via function/callback
+    </Third
+  </Second>
+</First>
+```
+
+Data down, functions up.
+
+React doesn't support two way binding inside of components themselves, Vue does.
+
+### Command
+
+Question Time: Who knows what the command pattern is?
+
+![question time](https://media.giphy.com/media/l0HlRnAWXxn0MhKLK/giphy.gif)
+
+```csharp
+public int GiveMeNumbers(int a, int b, int c) {
+  // stuff
+}
+
+public int GiveMeNumbers(NumbersCommand command) {
+  // stuff
+}
+```
+
+```typescript
+const MyComponent: React.FC<MyCommandProps> = ({ a, b, c, d, e }) => {
+  return();
+};
+
+interface MyCommandProps {
+  a: number;
+  b: number;
+  c: string;
+  d: string;
+  e: Date;
+}
+```
+
+```typescript
+interface MyCommand {
+  a: number;
+  b: number;
+  c: string;
+  d: string;
+  e: Date
+}
+
+const MyComponent: React.FC<MyCommandProps> = ({ command }) => {
+  return();
+};
+
+interface MyCommandProps {
+  command: MyCommand;
+}
+```
+
+**Personal Opinion:** Once you hit the 5-6 mark for parameters you are passing to any function, class, constructor, you should look to refactor that list.
+
+**Hint:** Its going to be really annoying when you test that code to have to pass in all of those parameters!
+
+### Separation of Concerns
+
+React and Vue are not MVC, or MVVM, or MVP libraries. They are Component based.
+
+Question Time: Who can define MVC/MVVM/MVP? Which of these is React or Vue?
+
+![more questions](https://media.giphy.com/media/MZQkUm97KTI1gI8sUj/giphy.gif)
+
+![the diff](https://imgs.search.brave.com/6iwqiHFR6n09iGBqboi9fbq4VZjswkG60xJ20HTg1zY/rs:fit:1024:504:1/g:ce/aHR0cHM6Ly93d3cu/c2ltZm9ybS5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMTgv/MDEvTVZDLXZzLU1W/UC12cy1NVlZNLW1v/YmlsZS1hcHAtZGV2/ZWxvcG1lbnQucG5n)
+
+Components are spaghetti, the good kind.
+
+![spaghetti](https://media.giphy.com/media/11uoNyauChZR16/giphy.gif)
+
+Good separation of concerns in components:
+
+1. Keeping components pure (presentation only)
+2. Keeping data access in special components (our form of DI)
+3. Keeping styling in a manageable state (avoiding inline)
+4. Moving complex logic to utility functions
+
+Testing will force you to keep your separations in check!86
+
+![react soc](https://reactjs.org/static/9381f09e609723a8bb6e4ba1a7713b46/90cbd/thinking-in-react-components.png)
+
+### Composition
+
+Question Time: Who can define composition? How is it different from aggregation?
+
+![questions](https://media.giphy.com/media/XHVmD4RyXgSjd8aUMb/giphy-downsized-large.gif)
+
+![comp vs agg](https://imgs.search.brave.com/osMPhTTWCTch5nDuOjTAFReRTllcLaYIQyQJlDEbVgo/rs:fit:514:181:1/g:ce/aHR0cHM6Ly9pLnN0/YWNrLmltZ3VyLmNv/bS9ZZU9yWi5qcGc)
+
+```jsx
+<Columns>
+  <Column />
+    <Column>{children}</Column> //content projection
+  <Column />
+</Columns>
+
+<CenteredColumns>
+  // content projection
+</CenteredColumns>
+```
+
+#### Choking parameters
+
+```jsx
+const Button: React.FC<ButtonProps> = ({ options }) => {
+  return (
+    <button role="button" className={`button  ${options}`}>
+      ClickMe
+    </button>
+  );
+};
+
+interface ButtonProps {
+  options: string;
+}
+```
+
+How would you do a large button?
+
+```jsx
+<Button options="is-large" />
+```
+
+or...
+
+```jsx
+const LargeButton: React.FC = () => {
+  return <Button options="is-large" />;
+};
+```
+
+#### Testing (Again)
+
+There are two types of testing:
+
+Normal functions: Just write a normal unit test
+
+Components: Using testing library/user event/jest dom
+
+![intermission](https://media.giphy.com/media/7z60uukpYWFLG/giphy.gif)
+
+#### Homework
+
+![hw](https://media.giphy.com/media/LNrYPitbb8D8A/giphy.gif)
+
+1. Get your environment ready
+2. Review any concepts you need to refresh your mind on
+3. Read the React/Vue documentation a first time
+4. (Optional) Make mistakes. Get messy. Write a component or two.
