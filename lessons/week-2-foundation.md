@@ -1,4 +1,4 @@
-# Week 2 Foundational Concepts
+# Week 2: Electric Boogaloo (Foundational Concepts)
 
 ## Goals
 
@@ -10,9 +10,17 @@ To cover key topics that will serve as a foundation to all skills required to be
 2. Cover key JS/TS topics that will be required for React and Vue
 3. Discuss reoccurring patterns that present themselves in component based frameworks
 
+## Show and Tell
+
+Who would like to present their week 1 solution to the class?
+
+![show me](https://media.giphy.com/media/3orifdyb5uQljmxgeA/giphy.gif)
+
 ## Overview
 
 It's all just HTML, CSS, and JavaScript at the end of the day.
+
+Remember the build folder I showed from the previous week?
 
 EZ Clap right?
 
@@ -26,7 +34,7 @@ EZ Clap right?
 [React Docs](https://reactjs.org/docs/getting-started.html)
 [Vue Docs](https://vuejs.org/guide/introduction.html)
 
-## Topics
+## Muy Importante Topics
 
 ### HTML
 
@@ -68,7 +76,34 @@ Learn your browser dev tools! Half of fixing all css issues is being well versed
 
 > React and Vue are very functional. Get "gud" with functions and functional programming.
 
-#### Arrow Functions
+#### ES5 (2009)
+
+##### Array methods of the young and restless
+
+| .NET Linq  | JS Array |
+| ---------- | -------- |
+| Select     | Map      |
+| SelectMany | FlatMap  |
+| Where      | Filter   |
+| Any        | Some     |
+| All        | Every    |
+| Find       | First    |
+
+[Underscore.js](https://github.com/jashkenas/underscore) - More utility functions.
+
+##### Strict Mode
+
+Enabled by default in your tsconfig.ts, please keep on.
+
+Covers 8 possible compile issues.
+
+#### ES6 (2015)
+
+Use let and const for variables.
+
+[ESLint rule](https://eslint.org/docs/rules/no-var) - Not enabled in recommended rule-set or react template.
+
+##### Arrow Functions
 
 Super basic arrow function:
 
@@ -147,7 +182,15 @@ export default MyComponent;
 
 The point is, React and Vue use functions...
 
-#### Callbacks
+##### For/of
+
+```typescript
+for (let num of numbers) {
+  console.log(num);
+}
+```
+
+##### Callbacks
 
 Simple: Passing a function as an argument.
 
@@ -171,7 +214,7 @@ const DoSomething = (printer: (msg: string) => void): void => {
 
 Do you just wait at the front door or do something else until the door bell rings?
 
-##### JavaScript then chains
+###### JavaScript then chains
 
 ```typescript
 let widgets = [];
@@ -179,9 +222,7 @@ let widgets = [];
 HttpClient.GetStuff().then((result) => (widgets = result));
 ```
 
-##### Callbacks in React and Vue
-
-1. Event Handling
+###### Event Handling
 
 ```typescript
 const submitForm = (event): void => {
@@ -191,7 +232,7 @@ const submitForm = (event): void => {
 <button type='submit' onClick={submitForm}>
 ```
 
-2. Callbacks as Props
+###### Callbacks as Props
 
 ```typescript
 const Form: React.FC<FormProps> = ({ submitForm }) => {
@@ -206,21 +247,30 @@ interface FormProps {
 export default Form;
 ```
 
-3. JS Array Functions
+##### Promises
 
-| .NET Linq  | JS Array |
-| ---------- | -------- |
-| Select     | Map      |
-| SelectMany | FlatMap  |
-| Where      | Filter   |
-| Any        | Some     |
-| All        | Every    |
+Question Time: Who can define a ES6 Promise?
 
-[Underscore.js](https://github.com/jashkenas/underscore) - More utility functions.
+PS: Use .NET Task as your reference.
 
-1. Using Async Code
+PPS: I am looking for one very specific word.
+
+![question time](https://media.giphy.com/media/3o7buirYcmV5nSwIRW/giphy.gif)
+
+###### Using Async Code
 
 ```typescript
+class HttpClient {
+  public static GetStuff(): Promise<WidgetResponse> {
+    return new Promise((resolve, reject) => {
+      if(nothingBadHappened) {
+        resolve(new WidgetResponse());
+      }
+      reject(new Error());
+    })
+  }
+}
+
 let widgets = [];
 
 HttpClient.GetStuff().then((result) => (widgets = result));
@@ -230,11 +280,15 @@ or...
 const widgets = await HttpClient.GetStuff();
 ```
 
-#### Destructuring Arrays and Objects
+[ESLint plugin for promises](https://github.com/xjamundx/eslint-plugin-promise) - Lots of nice rules for ES6 promises.
 
-##### Arrays
+If you already know how Tasks/async/await work in .NET, you're 90% of the way there.
 
-The useState hook in React uses array destructuring.
+##### Destructuring Arrays and Objects
+
+###### Arrays
+
+React hooks use lots of array destructuring.
 
 ```typescript
 const [a, b] = [1, 2];
@@ -261,7 +315,7 @@ console.log(countState[0]);
 countState[1](19);
 ```
 
-##### Objects
+###### Objects
 
 Used when passing props to a component.
 
@@ -294,3 +348,31 @@ interface MyComponentProps {
 
 export default MyComponent;
 ```
+
+##### Spread operator
+
+```typescript
+const myObj = {
+  count: number;
+  setCount: (value: number) => void;
+};
+
+function someFunc(count: number, setCount: (value: number) => void): void {
+  // do something
+}
+
+someFunc(...myObj);
+
+const myArray = [2, 3, 4];
+
+const spreadArray = [...myArray];
+
+```
+
+**Personal opinion**: Avoid the spread operator in typescript when possible. Biggest exception is when you need to clone an object/array to update state.
+
+[structured clone](https://developer.mozilla.org/en-US/docs/Web/API/structuredClone) - Alternative that isn't quite supported in the CRA yet, waiting on Jest 28.
+
+[React no spread props](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-props-no-spreading.md) - Not enabled by default.
+
+**More to come later!**
