@@ -34,7 +34,7 @@ EZ Clap right?
 [React Docs](https://reactjs.org/docs/getting-started.html)
 [Vue Docs](https://vuejs.org/guide/introduction.html)
 
-## Muy Importante Topics
+## Muy Important Topics
 
 ### HTML
 
@@ -80,14 +80,14 @@ Learn your browser dev tools! Half of fixing all css issues is being well versed
 
 ##### Array methods of the young and restless
 
-| .NET Linq  | JS Array |
+| .NET LINQ  | JS Array |
 | ---------- | -------- |
 | Select     | Map      |
 | SelectMany | FlatMap  |
 | Where      | Filter   |
 | Any        | Some     |
 | All        | Every    |
-| Find       | First    |
+| First      | Find     |
 
 [Underscore.js](https://github.com/jashkenas/underscore) - More utility functions.
 
