@@ -66,11 +66,11 @@ Most lessons will be conducted via examples in both React and Vue. The lessons w
 2. Basics: HTML, CSS, JS -> ES6, Functions, Callbacks, Destructuring Objects & Arrays, Command, One-Way Data Flow, Components, Testing, Separation of Responsibility, Composition, State Root, Pure Functions, Modules
 3. JSX, Binding, fragments/nodes, Content Projection
 4. Props, passing data down, Containers,
-5. Lists, Keys, Conditionals, Event handling, HOCs, directives
+5. Lists, Keys, Conditionals, directives, boxes
 6. State 1 - useState/ref
 7. State 2 - useEffect/onMounted/watch/computed
 8. State 3 - custom hooks
-9. Forms
-10. Data fetching with Axios
+9. Forms, Event handling,
+10. Data fetching with Axios, HOCs
 11. Routing, Layouts, Output,
 12. useReducer, State Management

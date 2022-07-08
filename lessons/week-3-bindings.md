@@ -547,7 +547,7 @@ i.e. Section = section = native section tag
 
 ![shiba time](https://media.giphy.com/media/ny7UCd6JETnmE/giphy.gif)
 
-1. Create some basic components that use basic binding (interpolation)
+1. Create some basic components that use basic binding (interpolation or attribute)
 2. Use Content Projection in some form (grab your fav css framework) and make a few basic components or style it yourself
 3. Write any tests when you have multiple logical branches
 4. Maybe no pop quiz next week...maybe.
