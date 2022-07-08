@@ -115,3 +115,89 @@ export default MyComponent;
   const numbers = [1, 2, 3, 4, 5, 6];
 </script>
 ```
+
+### Procedural Statements
+
+#### React Conditionals
+
+```tsx
+const MyComponent: React.FC = () => {
+
+  const result = conditional() {
+    // conditional statements
+  };
+
+  return (
+    {result}
+  )
+};
+
+export default MyComponent;
+```
+
+or...
+
+```tsx
+const MyComponent: React.FC = () => {
+
+  const myValue; // true or false
+
+  return (
+    {myValue &&
+      <p>Hello there!</p>
+    }
+  )
+};
+```
+
+#### Vue Conditionals
+
+```html
+<template>
+  <p v-if="result">Hello there!</p>
+  <p v-else>General Kenobi</p>
+</template>
+
+<script lang="ts">
+  const result = someFunction();
+</script>
+```
+
+### Drawing boxes
+
+#### 2.5 Most Important Things To Know in React/Vue/angular
+
+0. Test, Test, Test
+1. What is my state root (next week)
+2. What are my component boundaries (today)
+3. Nothing Else Matters
+
+Traditional Thinking:
+
+![mvc](https://imgs.search.brave.com/mV8ddk9FWHbqz7M8ayVrnKZjew0WA8mcnnsmubnpSxo/rs:fit:900:500:1/g:ce/aHR0cHM6Ly9jZG4u/ZWR1Y2JhLmNvbS9h/Y2FkZW15L3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDIwLzA0L01W/Qy1BcmNoaXRlY3R1/cmUuanBn)
+
+Components:
+
+![components](https://imgs.search.brave.com/4uiqy-MwvuzyE9AgRD4msoKA5BmRZKvaEcxx03OQp9g/rs:fit:960:638:1/g:ce/aHR0cDovL2phY29i/c21lZGlhLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMjAxNi8x/MC9sZWdvcy5qcGc)
+
+Except that in this cause, not only are you building things with legos, but you are defining their shape as well!
+
+| Standard   | Thinking     |
+| ---------- | ------------ |
+| MVC        | Page Centric |
+| MVVM       | Page Centric |
+| Components | View Centric |
+
+#### Rules For Thinking In Components
+
+1. Obtain a basic mockup of the UI
+2. Find repetition/lists, draw a box
+3. Find sections/titles, draw a box
+4. Find root area, draw a box
+
+#### Example time
+
+### Homework
+
+1. Continue on any project you started
+2. Take a screenshot of an existing website, and draw some boxes!
