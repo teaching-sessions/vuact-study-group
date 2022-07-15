@@ -409,9 +409,9 @@ What is so bad about the following?
 
 ```tsx
 const MyComponent: React.FC = () => {
-  const myDate = fetch('someApi.com');
+  const myData: string = fetch('someApi.com').then(x => x.data);
 
-  return ();
+  return ({mydata});
 }
 ```
 
