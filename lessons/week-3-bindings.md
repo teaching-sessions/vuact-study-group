@@ -480,7 +480,7 @@ Content Projection let you remove a lot of boiler plate. You can create large co
   <Container>
     <Columns>
       <Column />
-        <Column> {{ children }}</Column>
+        <Column> { children }</Column>
       <Column />
     <Columns />
   <Container />
