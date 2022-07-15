@@ -34,6 +34,15 @@ Those tradeoffs are:
 2. They **can't** be generics (Blazor is the exception)
 3. Props should be the defacto way of communicating between components
 
+### The Golden Rules
+
+![gold](https://media.giphy.com/media/wb6xgCSpLl0m4/giphy.gif)
+
+1. Components are just functions
+2. Props are just parameters
+3. Any issues with components props can be solved the same way you solve issues with functions & parameters.
+4. The over-under for max number of props is ~5.
+
 #### Vue Emits
 
 Vue has a feature called "emits" which are a way of raising a custom event in a component. These are bad for so many reasons:
@@ -111,12 +120,222 @@ defineProps<{
 
 ### Too Many Props
 
+Our component is unwieldy because we are passing too many props:
+
 ```tsx
-const MyComponent: React.FC<MyComponentProps> = () => {
+const MyComponent: React.FC<MyComponentProps> = ({ first, second, third, fourth, fifth }) => {
   return ();
 }
 
+interface MyComponentProps {
+  first: number;
+  second: string;
+  third: boolean;
+  fourth: (first: number) => void;
+  fifth: (second: string) => void;
+}
 ```
+
+#### Extra Component
+
+Extra new component:
+
+Pros:
+
+- Enforces good interface segregation
+
+Cons:
+
+- You can have too many components
+- Not always available (some components follow a strict hierarchy)
+
+```tsx
+const SubComponent: React.FC<SubComponentProps> = ({second, fifth}) => {
+  return();
+}
+
+interface SubComponentProps {
+  second: string;
+  fifth: (second: string) => void;
+}
+```
+
+```tsx
+const MyComponent: React.FC<MyComponentProps> = ({ first, second, third, fourth, fifth }) => {
+  return ();
+}
+
+interface MyComponentProps {
+  first: number;
+  third: boolean;
+  fourth: (first: number) => void;
+}
+```
+
+```tsx
+const Parent: React.FC = () => {
+  return(
+    <>
+      <SubComponent second={second} fifth={fifth} />
+      <MyComponent first={first} third={third} fourth={fourth} />
+    </>
+  )
+};
+```
+
+#### Try To Apply Optional Parameters
+
+Pros:
+
+- easy
+
+Cons:
+
+- Optional parameters may indicate something should not be a prop
+
+```tsx
+const MyComponent: React.FC<MyComponentProps> = ({
+  first = ValueDefault.Number,
+  second = "MyDefaultValue",
+  third,
+  fourth,
+  fifth
+  }) => {
+  return ();
+}
+
+interface MyComponentProps {
+  first?: number;
+  second?: string;
+  third: boolean;
+  fourth: (first: number) => void;
+  fifth: (second: string) => void;
+}
+```
+
+#### Consolidate Common Parameters
+
+Pros:
+
+- Allows you to extra common functionality
+- Very good way to deal with form inputs
+
+Cons:
+
+- Easy to over abstract props
+- May lead to type bloat
+
+```typescript
+interface IMyCommonInterface {
+  first: number;
+  fourth: (first: number) => void;
+}
+
+interface IMyOtherCommonInterface {
+  second: string;
+  fifth: (second: string) => void;
+}
+```
+
+```tsx
+const MyComponent: React.FC<MyComponentProps> = ({ first, second, third }) => {
+  return ();
+};
+
+interface MyComponentProps {
+  first: IMyCommonInterface
+  second: IMyOtherCommonInterface;
+  third: boolean;
+}
+```
+
+#### Use The Command Pattern
+
+Pros:
+
+- Consolidate props easily
+- Great if you have to drill props through multiple components
+
+Cons:
+
+- Can just kick the can down the road
+
+```tsx
+interface IMyCommand {
+  first: number;
+  second: string;
+  third: boolean;
+  fourth: (first: number) => void;
+  fifth: (second: string) => void;
+}
+```
+
+```tsx
+const MyComponent: React.FC<MyComponentProps> = ({ command }) => {
+  return ();
+}
+
+interface MyComponentProps {
+  command: IMyCommand
+}
+```
+
+#### Use Local State/Resolvers
+
+- We will cover this in a future meeting.
+- Reducers are just switch statements.
+
+Pros:
+
+- Can consolidate state via command Pattern
+- Can reduce callbacks my dispatching actions instead
+
+Cons:
+
+- Work best for same types
+- Can be overkill
+
+```tsx
+interface ILocalState {
+  first: number;
+  second: string;
+  third: boolean;
+}
+
+enum Actions {
+  fourth = 0,
+  fifth = 1,
+}
+```
+
+```tsx
+const MyComponent: React.FC<MyComponentProps> = ({ state, reducer }) => {
+  return ();
+}
+
+interface MyComponentProps {
+  state: ILocalState;
+  dispatcher: (action: Actions, value: string) => void;
+}
+```
+
+### Drilling Props
+
+Some component trees have lots of complexity:
+
+A -> B -> C -> D -> E
+
+State in component A is required in E, but has to go through B, C, and D
+
+The same issues as too many props applies to this situation. You may also:
+
+1. Be drawing your boxes suboptimal (Do you need a 5 deep tree when a 4 can do?)
+2. Your UI is too complex (Work with your UI designer)
+
+![le bagette](https://lucidar.me/en/web-dev-class/files/html-form-example.png)
+
+![task based ui](https://www.lifewire.com/thmb/IsEAnrGEgByz0tHW7gcIttkczAA=/699x524/smart/filters:no_upscale()/control-panel-applets-5a46623113f129003723917b.PNG)
+
 
 
 ## Containers
