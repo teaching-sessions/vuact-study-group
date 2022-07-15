@@ -336,8 +336,131 @@ The same issues as too many props applies to this situation. You may also:
 
 ![task based ui](https://www.lifewire.com/thmb/IsEAnrGEgByz0tHW7gcIttkczAA=/699x524/smart/filters:no_upscale()/control-panel-applets-5a46623113f129003723917b.PNG)
 
+> Something you just have to drill props and their is nothing you can do about it.
 
+![let it be](https://preview.redd.it/cg89ani7yr121.jpg?auto=webp&s=673c38f9bd0091a0d20b1f8f09438d51222ce559)
+
+### Bad Prop types
+
+There are certain props you **should not** pass.
+
+1. style
+2. className
+3. ...or anything related to css.
+
+[Good Read About Proper Prop Types](https://medium.com/@JanPaul123/don-t-pass-css-classes-between-components-e9f7ab192785) <- Because reasons
+
+What is bad about the following?
+
+```tsx
+const Button: React.FC<ButtonProps> = ({ className, text, handleOnClick }) => {
+  return (
+    <button className={`button ${className}` onClick={handleOnClick}}>{text}</button>
+    );
+
+    interface ButtonProps {
+      className?: string;
+      text: string;
+      handleOnClick(event: React.MouseEvent<HTMLButtonElement>) => void;
+    }
+}
+```
+
+This is akin to a public setter:
+
+```csharp
+public Guid Id { get; set; }
+```
+
+...better
+
+```tsx
+enum Color {
+  Primary = 0,
+  Secondary = 1,
+}
+
+const determineColor = (color: Color): void => {
+  switch(color) {
+    // blah blah blah
+  };
+}
+
+const Button: React.FC<ButtonProps> = ({ className, text, color, handleOnClick }) => {
+  return (
+    <button className={`button ${determineColor(color)}` onClick={handleOnClick}}>{text}</button>
+    );
+
+    interface ButtonProps {
+      color?: Color = Color.Primary,
+      text: string;
+      handleOnClick(event: React.MouseEvent<HTMLButtonElement>) => void;
+    }
+}
+```
+
+Components should not leak details and only provide explicit interfaces that conclude with a pre-defined state.
+
+When you allow clients to pass anything, you open up the possibility of putting a component into an undefined state.
 
 ## Containers
 
+What is so bad about the following?
 
+```tsx
+const MyComponent: React.FC = () => {
+  const myDate = fetch('someApi.com');
+
+  return ();
+}
+```
+
+You can't test/mock the api call. We need a way to separate our concerns in React/Vue.
+
+```tsx
+describe('MyComponent', () => {
+  it('does the thing', () => {
+    render(<MyComponent />);
+
+    // oh crap, calls production api, bad for post/put/deletes
+  })
+});
+```
+
+React/Vue don't have Services like Angular, you need to write your own.
+
+...use a Containers
+
+```tsx
+const MyComponentContainer: React.FC = () => {
+  const data = fetch('someApi.com');
+
+  return (<MyComponent data={data} />);
+}
+```
+
+```tsx
+const MyComponent: React.FC<MyComponentProps> = ({ data }) => {
+  // use data
+
+  return ();
+}
+
+interface MyComponentProps {
+  data: Array<string>;
+}
+```
+
+...now its EZ Clap to test.
+
+```tsx
+describe('MyComponent', () => {
+  it('does the thing', () => {
+    const data = [];
+
+    render(<MyComponent data={data} />);
+
+    // assert whatever you want
+  })
+});
+```
